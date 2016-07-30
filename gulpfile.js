@@ -13,7 +13,7 @@ gulp.task('watch', function() {
 
 function build() {
   return gulp.src('src/*.js')
-    .pipe(babel({presets: ['es2015']}))
+    .pipe(babel({presets: ['es2015'], plugins: ['transform-runtime']}))
     .pipe(gulp.dest('.'))
 }
 

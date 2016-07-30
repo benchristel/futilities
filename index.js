@@ -1,5 +1,11 @@
 "use strict";
 
+var _getIterator2 = require("babel-runtime/core-js/get-iterator");
+
+var _getIterator3 = _interopRequireDefault(_getIterator2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var map = exports.map = function (fn) {
   return function (array) {
     var results = [];
@@ -32,7 +38,7 @@ var take = exports.take = function (n) {
     var _iteratorError = undefined;
 
     try {
-      for (var _iterator = array[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      for (var _iterator = (0, _getIterator3.default)(array), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
         item = _step.value;
 
         if (i++ === n) {
@@ -77,7 +83,7 @@ var drop = exports.drop = function (n) {
     var _iteratorError2 = undefined;
 
     try {
-      for (var _iterator2 = array[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+      for (var _iterator2 = (0, _getIterator3.default)(array), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
         item = _step2.value;
 
         if (i++ < n) {
