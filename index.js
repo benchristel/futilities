@@ -1,61 +1,124 @@
-const map = exports.map =
-  fn => array => {
-    let results = []
-    for (let i = 0; i < array.length; i++) {
-      results.push(fn(array[i]))
-    }
-    return results
-  }
+"use strict";
 
-const reduce = exports.reduce =
-  fn => initial => array => {
-    let result = initial
-    for (let i = 0; i < array.length; i++) {
-      result = fn(result, array[i])
+var map = exports.map = function (fn) {
+  return function (array) {
+    var results = [];
+    for (var i = 0; i < array.length; i++) {
+      results.push(fn(array[i]));
     }
-    return result
-  }
+    return results;
+  };
+};
 
-const take = exports.take =
-  n => array => {
-    let i = 0, item, results = [];
-    for (item of array) {
-      if (i++ === n) {
-        break
+var reduce = exports.reduce = function (fn) {
+  return function (initial) {
+    return function (array) {
+      var result = initial;
+      for (var i = 0; i < array.length; i++) {
+        result = fn(result, array[i]);
       }
-      results.push(item)
-    }
-    return results
-  }
+      return result;
+    };
+  };
+};
 
-const drop = exports.drop =
-  n => array => {
+var take = exports.take = function (n) {
+  return function (array) {
+    var i = 0,
+        item = void 0,
+        results = [];
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
+    try {
+      for (var _iterator = array[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        item = _step.value;
+
+        if (i++ === n) {
+          break;
+        }
+        results.push(item);
+      }
+    } catch (err) {
+      _didIteratorError = true;
+      _iteratorError = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion && _iterator.return) {
+          _iterator.return();
+        }
+      } finally {
+        if (_didIteratorError) {
+          throw _iteratorError;
+        }
+      }
+    }
+
+    return results;
+  };
+};
+
+var drop = exports.drop = function (n) {
+  return function (array) {
     if (n >= array.length) {
-      return []
+      return [];
     } else if (n < 0) {
-      return array
+      return array;
     }
 
-    return array.slice(n)
+    return array.slice(n);
 
-    let i = 0, item, results = [];
-    for (item of array) {
-      if (i++ < n) {
-        continue
+    var i = 0,
+        item = void 0,
+        results = [];
+    var _iteratorNormalCompletion2 = true;
+    var _didIteratorError2 = false;
+    var _iteratorError2 = undefined;
+
+    try {
+      for (var _iterator2 = array[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+        item = _step2.value;
+
+        if (i++ < n) {
+          continue;
+        }
+        results.push(item);
       }
-      results.push(item)
+    } catch (err) {
+      _didIteratorError2 = true;
+      _iteratorError2 = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion2 && _iterator2.return) {
+          _iterator2.return();
+        }
+      } finally {
+        if (_didIteratorError2) {
+          throw _iteratorError2;
+        }
+      }
     }
-    return results
-  }
 
-const compose = exports.compose =
-  (f, g) => x =>
-    g(f(x))
+    return results;
+  };
+};
 
-const identity = exports.identity =
-  x => x
+var compose = exports.compose = function (f, g) {
+  return function (x) {
+    return g(f(x));
+  };
+};
+
+var identity = exports.identity = function (x) {
+  return x;
+};
 
 // private functions
 
-const max2 = (a, b) => a > b ? a : b
-const min2 = (a, b) => a < b ? a : b
+var max2 = function max2(a, b) {
+  return a > b ? a : b;
+};
+var min2 = function min2(a, b) {
+  return a < b ? a : b;
+};
