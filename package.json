@@ -1,0 +1,25 @@
+{
+  "name": "futilities",
+  "version": "0.0.0",
+  "description": "Functional utilities",
+  "main": "index.js",
+  "scripts": {
+    "test": "ava"
+  },
+  "keywords": [
+    "functional",
+    "programming",
+    "underscore",
+    "lodash",
+    "util",
+    "utility",
+    "utilities"
+  ],
+  "author": "Ben Christel",
+  "license": "MIT",
+  "devDependencies": {
+    "ava": "^0.15.2",
+    "gulp": "^3.9.1",
+    "gulp-jasmine": "^2.4.0"
+  }
+}
