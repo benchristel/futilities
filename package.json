@@ -3,6 +3,7 @@
   "version": "0.0.2",
   "description": "Functional utilities",
   "main": "index.js",
+  "repository": "https://github.com/benchristel/futilities",
   "scripts": {
     "test": "gulp"
   },
