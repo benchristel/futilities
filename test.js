@@ -1,5 +1,13 @@
 'use strict';
 
+var _regenerator = require('babel-runtime/regenerator');
+
+var _regenerator2 = _interopRequireDefault(_regenerator);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _marked = [threeThings].map(_regenerator2.default.mark);
+
 var _require = require('ava');
 
 var test = _require.test;
@@ -12,6 +20,7 @@ var take = _require2.take;
 var drop = _require2.drop;
 var compose = _require2.compose;
 var identity = _require2.identity;
+var array = _require2.array;
 
 
 var addOne = function addOne(n) {
@@ -21,6 +30,35 @@ var addOne = function addOne(n) {
 var add = function add(a, b) {
   return a + b;
 };
+
+var naturalNumbers = _regenerator2.default.mark(function naturalNumbers() {
+  var n;
+  return _regenerator2.default.wrap(function naturalNumbers$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          n = 1;
+
+        case 1:
+          if (!1) {
+            _context.next = 6;
+            break;
+          }
+
+          _context.next = 4;
+          return n++;
+
+        case 4:
+          _context.next = 1;
+          break;
+
+        case 6:
+        case 'end':
+          return _context.stop();
+      }
+    }
+  }, naturalNumbers, this);
+});
 
 test(function testMap(t) {
   t.deepEqual(map(addOne)([1, 2, 3]), [2, 3, 4]);
@@ -49,6 +87,10 @@ test(function testTakeWhenNIsGreaterThanArrayLength(t) {
   t.deepEqual(take(3)([1, 2]), [1, 2]);
 });
 
+test(function testTakeCalledWithGenerator(t) {
+  t.deepEqual(take(3)(naturalNumbers()), [1, 2, 3]);
+});
+
 test(function testDrop(t) {
   t.deepEqual(drop(2)([1, 2, 3, 4, 5]), [3, 4, 5]);
   t.deepEqual(drop(1)([1, 2, 3, 4, 5]), [2, 3, 4, 5]);
@@ -68,6 +110,42 @@ test(function testDropWhenNIsZero(t) {
 
 test(function testDropWhenNIsNegative(t) {
   t.deepEqual(drop(-1)([1, 2]), [1, 2]);
+});
+
+test(function testDropCalledWithGenerator(t) {
+  t.deepEqual(take(3)(drop(2)(naturalNumbers())), [3, 4, 5]);
+});
+
+function threeThings() {
+  return _regenerator2.default.wrap(function threeThings$(_context2) {
+    while (1) {
+      switch (_context2.prev = _context2.next) {
+        case 0:
+          _context2.next = 2;
+          return 1;
+
+        case 2:
+          _context2.next = 4;
+          return 2;
+
+        case 4:
+          _context2.next = 6;
+          return 3;
+
+        case 6:
+        case 'end':
+          return _context2.stop();
+      }
+    }
+  }, _marked[0], this);
+}
+
+test(function testDropWithGeneratorWhenNIsEqualToNumberOfItems(t) {
+  t.deepEqual(array(drop(3)(threeThings())), []);
+});
+
+test(function testDropWithGeneratorWhenNIsGreaterThanNumberOfItems(t) {
+  t.deepEqual(array(drop(4)(threeThings())), []);
 });
 
 var applyCoupon = function applyCoupon(price) {

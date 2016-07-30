@@ -17,9 +17,9 @@ const reduce = exports.reduce =
   }
 
 const take = exports.take =
-  n => array => {
+  n => iterable => {
     let i = 0, item, results = [];
-    for (item of array) {
+    for (item of iterable) {
       if (i++ === n) {
         break
       }
@@ -36,17 +36,20 @@ const drop = exports.drop =
       return array
     }
 
-    return array.slice(n)
-
-    let i = 0, item, results = [];
-    for (item of array) {
-      if (i++ < n) {
-        continue
-      }
-      results.push(item)
+    if (array instanceof Array) {
+      return array.slice(n)
     }
-    return results
+
+    return (function *() {
+      for (let i = 0; i < n; i++) {
+        array.next()
+      }
+      yield *array
+    })()
   }
+
+const array = exports.array =
+  iterable => [...iterable]
 
 const compose = exports.compose =
   (f, g) => x =>
@@ -59,3 +62,4 @@ const identity = exports.identity =
 
 const max2 = (a, b) => a > b ? a : b
 const min2 = (a, b) => a < b ? a : b
+
