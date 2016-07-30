@@ -4,7 +4,7 @@
   "description": "Functional utilities",
   "main": "index.js",
   "scripts": {
-    "test": "ava"
+    "test": "gulp"
   },
   "keywords": [
     "functional",
@@ -20,7 +20,9 @@
   "devDependencies": {
     "ava": "^0.15.2",
     "gulp": "github:gulpjs/gulp#4.0",
+    "gulp-ava": "^0.12.1",
     "gulp-babel": "^6.1.2",
-    "gulp-jasmine": "^2.4.0"
+    "gulp-jasmine": "^2.4.0",
+    "gulp-sane-watch": "^2.0.0"
   }
 }
