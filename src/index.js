@@ -1,10 +1,18 @@
 const map = exports.map =
-  fn => array => {
-    let results = []
-    for (let i = 0; i < array.length; i++) {
-      results.push(fn(array[i]))
+  fn => iterable => {
+    if (iterable instanceof Array) {
+      let results = []
+      for (let i = 0; i < iterable.length; i++) {
+        results.push(fn(iterable[i]))
+      }
+      return results
+    } else {
+      return function *() {
+        for (let item of iterable()) {
+          yield fn(item)
+        }
+      }
     }
-    return results
   }
 
 const reduce = exports.reduce =
@@ -19,6 +27,7 @@ const reduce = exports.reduce =
 const take = exports.take =
   n => iterable => {
     let i = 0, item, results = [];
+    if (!(iterable instanceof Array)) iterable = iterable()
     for (item of iterable) {
       if (i++ === n) {
         break
@@ -29,27 +38,27 @@ const take = exports.take =
   }
 
 const drop = exports.drop =
-  n => array => {
-    if (n >= array.length) {
-      return []
-    } else if (n < 0) {
-      return array
+  n => iterable => {
+    if (n < 0) {
+      return iterable
     }
 
-    if (array instanceof Array) {
-      return array.slice(n)
+    if (iterable instanceof Array) {
+      return iterable.slice(n)
     }
 
-    return (function *() {
+    return function *() {
+      let iterator = iterable()
       for (let i = 0; i < n; i++) {
-        array.next()
+        iterator.next()
       }
-      yield *array
-    })()
+      yield *iterator
+    }
   }
 
 const array = exports.array =
-  iterable => [...iterable]
+  iterable => 
+    isArray(iterable) ? iterable : [...iterable()]
 
 const compose = exports.compose =
   (f, g) => x =>
@@ -62,4 +71,8 @@ const identity = exports.identity =
 
 const max2 = (a, b) => a > b ? a : b
 const min2 = (a, b) => a < b ? a : b
+
+function isArray(allegedArray) {
+  return Object.prototype.toString.call(allegedArray) === '[object Array]'
+}
 
