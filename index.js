@@ -16,7 +16,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var map = exports.map = function (fn) {
   return function (iterable) {
-    if (iterable instanceof Array) {
+    if (isArray(iterable)) {
       var results = [];
       for (var i = 0; i < iterable.length; i++) {
         results.push(fn(iterable[i]));
@@ -112,16 +112,19 @@ var reduce = exports.reduce = function (fn) {
 
 var take = exports.take = function (n) {
   return function (iterable) {
+    if (isArray(iterable)) {
+      return iterable.slice(0, n);
+    }
+
     var i = 0,
         item = void 0,
         results = [];
-    if (!(iterable instanceof Array)) iterable = iterable();
     var _iteratorNormalCompletion2 = true;
     var _didIteratorError2 = false;
     var _iteratorError2 = undefined;
 
     try {
-      for (var _iterator2 = (0, _getIterator3.default)(iterable), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+      for (var _iterator2 = (0, _getIterator3.default)(iterable()), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
         item = _step2.value;
 
         if (i++ === n) {
@@ -154,7 +157,7 @@ var drop = exports.drop = function (n) {
       return iterable;
     }
 
-    if (iterable instanceof Array) {
+    if (isArray(iterable)) {
       return iterable.slice(n);
     }
 

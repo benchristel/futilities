@@ -28,9 +28,12 @@ const reduce = exports.reduce =
 
 const take = exports.take =
   n => iterable => {
+    if (isArray(iterable)) {
+      return iterable.slice(0, n)
+    }
+
     let i = 0, item, results = [];
-    if (!isArray(iterable)) iterable = iterable()
-    for (item of iterable) {
+    for (item of iterable()) {
       if (i++ === n) {
         break
       }
