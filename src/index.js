@@ -6,6 +6,8 @@ const map = exports.map =
         results.push(fn(iterable[i]))
       }
       return results
+    } else if (typeof iterable.map === 'function') {
+      return iterable.map(fn)
     } else {
       return function *() {
         for (let item of iterable()) {

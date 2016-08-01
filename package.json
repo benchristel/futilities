@@ -27,7 +27,8 @@
     "gulp-babel": "^6.1.2",
     "gulp-jasmine": "^2.4.0",
     "gulp-sane-watch": "^2.0.0",
-    "gulp-util": "^3.0.7"
+    "gulp-util": "^3.0.7",
+    "immutable": "^3.8.1"
   },
   "dependencies": {
     "babel-runtime": "^6.11.6"

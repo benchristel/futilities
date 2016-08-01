@@ -12,15 +12,19 @@ var _require = require('ava');
 
 var test = _require.test;
 
-var _require2 = require('./index.js');
+var _require2 = require('immutable');
 
-var map = _require2.map;
-var reduce = _require2.reduce;
-var take = _require2.take;
-var drop = _require2.drop;
-var compose = _require2.compose;
-var identity = _require2.identity;
-var array = _require2.array;
+var List = _require2.List;
+
+var _require3 = require('./index.js');
+
+var map = _require3.map;
+var reduce = _require3.reduce;
+var take = _require3.take;
+var drop = _require3.drop;
+var compose = _require3.compose;
+var identity = _require3.identity;
+var array = _require3.array;
 
 
 var addOne = function addOne(n) {
@@ -78,6 +82,10 @@ test(function testMapWithFiniteGenerator(t) {
   });
 
   t.deepEqual(array(squaresOf(threeThings)), [1, 4, 9]);
+});
+
+test(function testMapWithImmutableList(t) {
+  t.true(map(addOne)(List.of(1, 2, 3)).equals(List.of(2, 3, 4)));
 });
 
 test(function testReduceEmpty(t) {

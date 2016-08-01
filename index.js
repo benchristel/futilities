@@ -22,6 +22,8 @@ var map = exports.map = function (fn) {
         results.push(fn(iterable[i]));
       }
       return results;
+    } else if (typeof iterable.map === 'function') {
+      return iterable.map(fn);
     } else {
       return _regenerator2.default.mark(function _callee() {
         var _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, item;

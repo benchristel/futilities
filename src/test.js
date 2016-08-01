@@ -1,4 +1,5 @@
-const {test} = require('ava')
+const { test } = require('ava')
+const { List } = require('immutable')
 const {
   map,
   reduce,
@@ -32,6 +33,10 @@ test(function testMapWithFiniteGenerator(t) {
   let squaresOf = map(x => x * x)
 
   t.deepEqual(array(squaresOf(threeThings)), [1, 4, 9])
+})
+
+test(function testMapWithImmutableList(t) {
+  t.true(map(addOne)(List.of(1, 2, 3)).equals(List.of(2, 3, 4)))
 })
 
 test(function testReduceEmpty(t) {
