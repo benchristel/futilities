@@ -1,6 +1,6 @@
 const map = exports.map =
   fn => iterable => {
-    if (iterable instanceof Array) {
+    if (isArray(iterable)) {
       let results = []
       for (let i = 0; i < iterable.length; i++) {
         results.push(fn(iterable[i]))
@@ -29,7 +29,7 @@ const reduce = exports.reduce =
 const take = exports.take =
   n => iterable => {
     let i = 0, item, results = [];
-    if (!(iterable instanceof Array)) iterable = iterable()
+    if (!isArray(iterable)) iterable = iterable()
     for (item of iterable) {
       if (i++ === n) {
         break
@@ -45,7 +45,7 @@ const drop = exports.drop =
       return iterable
     }
 
-    if (iterable instanceof Array) {
+    if (isArray(iterable)) {
       return iterable.slice(n)
     }
 
