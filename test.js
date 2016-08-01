@@ -111,6 +111,10 @@ test(function testTakeWhenNIsGreaterThanArrayLength(t) {
   t.deepEqual(take(3)([1, 2]), [1, 2]);
 });
 
+test(function testTakeWhenNIsNegative(t) {
+  t.deepEqual(take(-1)([1, 2]), []);
+});
+
 test(function testTakeCalledWithGenerator(t) {
   t.deepEqual(take(3)(naturalNumbers), [1, 2, 3]);
 });

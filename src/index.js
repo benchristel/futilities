@@ -28,6 +28,10 @@ const reduce = exports.reduce =
 
 const take = exports.take =
   n => iterable => {
+    if (n < 0) {
+      return []
+    }
+
     if (isArray(iterable)) {
       return iterable.slice(0, n)
     }

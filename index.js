@@ -112,6 +112,10 @@ var reduce = exports.reduce = function (fn) {
 
 var take = exports.take = function (n) {
   return function (iterable) {
+    if (n < 0) {
+      return [];
+    }
+
     if (isArray(iterable)) {
       return iterable.slice(0, n);
     }
